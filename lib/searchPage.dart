@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:instagram_clon/createPage.dart';
+import 'package:instagramclon/createPage.dart';
 
 class SearchPage extends StatefulWidget {
   @override
