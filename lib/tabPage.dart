@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_clon/accountPage.dart';
-import 'package:instagram_clon/homePage.dart';
-import 'package:instagram_clon/searchPage.dart';
+import 'package:instagramclon/homePage.dart';
+
+
 
 class TabPage extends StatefulWidget {
   @override
