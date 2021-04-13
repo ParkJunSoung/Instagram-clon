@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AccountPage extends StatefulWidget {
   @override
@@ -6,6 +8,8 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +20,15 @@ class _AccountPageState extends State<AccountPage> {
 
   Widget _buildAppBar() {
     return AppBar(
-      actions: [IconButton(icon: Icon(Icons.exit_to_app), onPressed: () {})],
+      actions: [
+        IconButton(
+          icon: Icon(Icons.exit_to_app),
+          onPressed: () {
+            FirebaseAuth.instance.signOut();
+            _googleSignIn.signOut();
+          },
+        )
+      ],
     );
   }
 
@@ -35,34 +47,36 @@ class _AccountPageState extends State<AccountPage> {
                     width: 80,
                     height: 80,
                     child: CircleAvatar(
-                      backgroundImage: NetworkImage('https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2018/07/PS18070900090.jpg'),
+                      backgroundImage: NetworkImage(
+                          'https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2018/07/PS18070900090.jpg'),
                     ),
                   ),
                   Container(
-                    width: 80,
-                    height:80,
-                    alignment: Alignment.bottomRight,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        SizedBox(
-                          height: 28,
-                          width: 28,
-                          child: FloatingActionButton(onPressed: null,
-                            backgroundColor: Colors.white,
+                      width: 80,
+                      height: 80,
+                      alignment: Alignment.bottomRight,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          SizedBox(
+                            height: 28,
+                            width: 28,
+                            child: FloatingActionButton(
+                              onPressed: null,
+                              backgroundColor: Colors.white,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 25,
-                          width: 25,
-                          child: FloatingActionButton(onPressed: null,
-                            backgroundColor: Colors.blue,
-                            child: Icon(Icons.add),),
-
-                        ),
-                      ],
-                    )
-                  )
+                          SizedBox(
+                            height: 25,
+                            width: 25,
+                            child: FloatingActionButton(
+                              onPressed: null,
+                              backgroundColor: Colors.blue,
+                              child: Icon(Icons.add),
+                            ),
+                          ),
+                        ],
+                      ))
                 ],
               ),
               Padding(padding: EdgeInsets.all(8)),
