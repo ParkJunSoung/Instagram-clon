@@ -1,8 +1,15 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:instagramclon/createPage.dart';
+import 'package:instagramclon/detail.dart';
+
 
 class SearchPage extends StatefulWidget {
+  final User user;
+
+  SearchPage(this.user);
+
   @override
   _SearchPageState createState() => _SearchPageState();
 }
@@ -13,31 +20,58 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(),
       body: buildBody(),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.push(context,
-        MaterialPageRoute(builder: (context)=> CreatePage()));
-      }
-        ,
-      backgroundColor: Colors.blue,
-      child: Icon(Icons.create),),
-
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CreatePage(widget.user)));
+        },
+        backgroundColor: Colors.blue,
+        child: Icon(Icons.create),
+      ),
     );
   }
 
- Widget buildBody() {
-    return GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 3,
-      childAspectRatio: 1,
-      mainAxisSpacing: 1,
-      crossAxisSpacing: 1),
-        itemCount: 5,
-        itemBuilder: (context, index){
-    return _buildListItem(context, index);
-   });
+  Widget buildBody() {
+    return StreamBuilder(
+      stream: FirebaseFirestore.instance.collection('post').snapshots(),
+      builder: (_, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if(!snapshot.hasData) {
+          return Center(child: CircularProgressIndicator());
+        }
+        var items = snapshot.data?.docs ?? [];
 
- }
+        return GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 1,
+            childAspectRatio: 1,
+            mainAxisSpacing: 1,
+            crossAxisCount: 3),
+          itemCount: items.length,
+          itemBuilder: (context, index){
+            return _buildListItem(context, items[index]);
+          }
+          );
+      },
+    );
+  }
 
-  Widget _buildListItem(BuildContext context, int index) {
-    return Image.network('https://spnimage.edaily.co.kr/images/Photo/files/NP/S/2018/07/PS18070900090.jpg',fit: BoxFit.cover,);
+  Widget _buildListItem(context, document) {
+    return Hero(
+      tag: document['photoUrl'],
+      child: Material(
+        child: InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context){
+             return Detail(document);
+            }));
+          },
+            child: Image.network(
+              document['photoUrl'],
+              fit: BoxFit.cover),
+
+        ),
+      ),
+    );
+
   }
 }
