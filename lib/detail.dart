@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+//hhhdfsfsdfsd
 class Detail extends StatelessWidget {
   final dynamic document;
 
