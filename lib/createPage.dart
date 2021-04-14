@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CreatePage extends StatefulWidget {
-  final User user;;
+  final User user;
 
   CreatePage(this.user);
 

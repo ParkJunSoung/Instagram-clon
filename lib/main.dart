@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
   Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
-    // Uncomment this to use the auth emulator for testing
+    // Uncomment this to use the auth emulator for testingklkS
     // await FirebaseAuth.instance.useEmulator('http://localhost:9099');
     runApp(MyApp());
   }
