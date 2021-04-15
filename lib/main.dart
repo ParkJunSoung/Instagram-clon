@@ -1,5 +1,5 @@
+import 'package:Instagramclone/rootPage.dart';
 import 'package:flutter/material.dart';
-import 'package:instagramclon/rootPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 
   Future<void> main() async {

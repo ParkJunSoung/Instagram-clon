@@ -1,7 +1,7 @@
+import 'package:Instagramclone/accountPage.dart';
+import 'package:Instagramclone/homePage.dart';
+import 'package:Instagramclone/searchPage.dart';
 import 'package:flutter/material.dart';
-import 'package:instagramclon/accountPage.dart';
-import 'package:instagramclon/homePage.dart';
-import 'package:instagramclon/searchPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class TabPage extends StatefulWidget {

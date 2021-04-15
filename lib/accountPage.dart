@@ -22,7 +22,10 @@ class _AccountPageState extends State<AccountPage> {
     FirebaseFirestore.instance.collection('post').where('email', isEqualTo: widget.user.email)
         .get()
         .then((snapShot) {
-      _postCount = snapShot.docs.length;
+          setState(() {
+            _postCount = snapShot.docs.length;
+          });
+
     });
   }
 
@@ -104,9 +107,9 @@ class _AccountPageState extends State<AccountPage> {
           ),
           Text('$_postCount\n게시물',
               textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
-          Text('$_postCount\n팔로워',
+          Text('0\n팔로워',
               textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
-          Text('$_postCount\n팔로잉',
+          Text('0\n팔로잉',
               textAlign: TextAlign.center, style: TextStyle(fontSize: 18)),
         ],
       ),

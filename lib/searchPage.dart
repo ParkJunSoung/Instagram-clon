@@ -1,8 +1,9 @@
+import 'package:Instagramclone/createPage.dart';
+import 'package:Instagramclone/detail.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:instagramclon/createPage.dart';
-import 'package:instagramclon/detail.dart';
+
 
 
 class SearchPage extends StatefulWidget {
@@ -55,18 +56,18 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget _buildListItem(context, document) {
+  Widget _buildListItem(context, docs) {
     return Hero(
-      tag: document['photoUrl'],
+      tag: docs['photoUrl'],
       child: Material(
         child: InkWell(
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context){
-             return Detail(document);
+             return Detail(docs);
             }));
           },
             child: Image.network(
-              document['photoUrl'],
+                docs['photoUrl'],
               fit: BoxFit.cover),
 
         ),
